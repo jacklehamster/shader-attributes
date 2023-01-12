@@ -1,9 +1,7 @@
-function helloWorld() {
-  console.log("hello world");
-}
+import getShaderVariables from "./shader-utils";
 
 const exports = {
-  helloWorld,
+  getShaderVariables,
 }
 
 export default exports;

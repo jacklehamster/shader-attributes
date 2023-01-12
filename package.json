@@ -1,6 +1,6 @@
 {
-  "name": "@dobuki/lib-template",
-  "version": "1.0.5",
+  "name": "@dobuki/shader-attributes",
+  "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
   "type": "module",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jacklehamster/lib-template.git"
+    "url": "git+https://github.com/jacklehamster/shader-attributes.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jacklehamster/lib-template/issues"
+    "url": "https://github.com/jacklehamster/shader-attributes/issues"
   },
-  "homepage": "https://github.com/jacklehamster/lib-template#readme",
+  "homepage": "https://github.com/jacklehamster/shader-attributes#readme",
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^18.7.14",

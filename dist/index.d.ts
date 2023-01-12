@@ -1,5 +1,5 @@
-declare function helloWorld(): void;
+import getShaderVariables from "./shader-utils";
 declare const exports: {
-    helloWorld: typeof helloWorld;
+    getShaderVariables: typeof getShaderVariables;
 };
 export default exports;

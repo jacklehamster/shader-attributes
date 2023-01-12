@@ -1,2 +1,2 @@
-(()=>{"use strict";const o={helloWorld:function(){console.log("hello world")}};globalThis.exports=o})();
+(()=>{"use strict";globalThis.exports={getShaderVariables:function(...t){const a=[];return t.forEach((t=>{var i;const n=null===(i=t.match(/\n(in|attribute|uniform) ([\w]+) ([\w]+)(\[.+\])?;/g))||void 0===i?void 0:i.map((t=>t.match(/\n((in|attribute|uniform) ([\w]+) ([\w]+)(\[.+\])?;)/)));a.push(...(null!=n?n:[]).filter((t=>!!t)).map((([,t,a,i,n])=>({line:t,attributeType:a,dataType:i,name:n}))))})),a}}})();
 //# sourceMappingURL=main.js.map

@@ -6,8 +6,8 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = "0px";
+        div.style.position = "fixed";
+        div.style.bottom = "0px";
         div.style.left = "0px";
         div.style.backgroundColor = "silver";
         div.style.width = "100vw";
@@ -16,12 +16,73 @@
         div.style.opacity = ".8";
         div.style.cursor = "pointer";
         div.addEventListener("mousedown", () => document.body.removeChild(div));
-        div.innerText = `❌ Exports: ${Object.keys(exports).join(", ")}`;
+        div.innerText = `✖️ Exports: ${Object.keys(exports).join(", ")}`;
         document.body.appendChild(div);
       });
     </script>
     <title>Demo</title>
+    <style>
+      .group {
+        border: 1px solid black;
+        margin: 10px;
+      }
+    </style>
 	</head>
 	<body>
+    <script>
+     async function selectShader(shader) {
+      const shaderDiv = document.getElementById("shader");
+      shaderDiv.textContent = "";
+      if (shader?.length) {
+        const content = await fetch(shader);
+        const text = await content.text();
+        shaderDiv.textContent = text;
+        fetchParameters(shaderDiv.textContent);
+      }
+     }
+
+     const { getShaderVariables } = exports;
+     function fetchParameters(shaderText) {
+      const div = document.getElementById("params");
+      div.textContent = "";
+      const variables = getShaderVariables(shaderText);
+      variables.forEach(({name, line, attributeType, dataType}) => {
+        const group = div.appendChild(document.createElement("div"));
+        group.className = "group";
+        const nameDiv = group.appendChild(document.createElement("div"));
+        nameDiv.textContent = `Name: ${name}`;
+        const attributeTypeDiv = group.appendChild(document.createElement("div"));
+        attributeTypeDiv.textContent = `Attribute type: ${attributeType}`;
+        const dataTypeDiv = group.appendChild(document.createElement("div"));
+        dataTypeDiv.textContent = `Data type: ${dataType}`;
+        const lineDiv = group.appendChild(document.createElement("div"));
+        lineDiv.textContent = `Line: ${line}`;
+      });
+     }
+
+     document.addEventListener("DOMContentLoaded", () => {
+      const vertextShader = "shaders/vertexShader.glsl";
+      document.getElementById("shader-select").value = vertextShader;
+      selectShader(vertextShader);
+     });
+    </script>
+
+    <div>
+      <select id="shader-select" onchange="selectShader(this.value);">
+        <option value="">custom</option>
+        <option value="shaders/vertexShader.glsl">shaders/vertexShader.glsl</option>
+        <option value="shaders/fragmentShader.glsl">shaders/fragmentShader.glsl</option>
+      </select>
+
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <div>
+        <textarea id="shader" style="font-size: 8pt; width: 100%" rows="30" onkeydown='document.getElementById("shader-select").value = ""'
+        onchange="fetchParameters(this.value)">
+      </textarea>
+      </div>
+      <div id="params" style="font-size: 8pt">
+      </div>
+      </div>
 	</body>
 </html>
