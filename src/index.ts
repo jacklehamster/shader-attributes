@@ -1,4 +1,4 @@
-import getShaderVariables from "./shader-utils";
+import getShaderVariables, { Variable } from "./shader-utils";
 
 const exports = {
   getShaderVariables,
